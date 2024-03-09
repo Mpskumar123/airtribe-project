@@ -13,10 +13,14 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "nuxt": "^2.0.0"
+    "nuxt": "^2.0.0",
+    "vue": "^2.7.16",
+    "vue-server-renderer": "^2.7.16"
   },
   "devDependencies": {
+    "@element-plus/nuxt": "^1.0.7",
     "babel-eslint": "^10.0.1",
+    "element-plus": "^2.6.1",
     "eslint": "^4.19.1",
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-loader": "^2.1.1",
