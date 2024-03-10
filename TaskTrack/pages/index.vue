@@ -3,9 +3,9 @@
     <div class="status">
       <h2>
         <label style="background-color: #ffcdd2; border-radius: 5px;">Not started</label>
-        {{ taskCounts.notStarted }}
-        <i class="mdi mdi-dots-horizontal"></i> <!-- Three dots icon -->
-        <i class="mdi mdi-plus"></i> <!-- Plus icon -->
+        <span style="color: #B9B9B7;">{{ taskCounts.notStarted }}</span>
+         <i class="fas fa-ellipsis-h" style="color: #B9B9B7;"></i> 
+        <i class="fas fa-plus"  style="color: #B9B9B7;"></i> 
       </h2>
       <div class="tasks" id="notStarted" @drop="drop($event, 'notStarted')" @dragover.prevent="allowDrop">
         <div class="task" v-for="task in tasks.notStarted" :key="task.id" :draggable="true" @dragstart="dragStart($event, 'notStarted', task.id)">
@@ -17,9 +17,9 @@
     <div class="status">
       <h2>
         <label style="background-color: #efe3c3; border-radius: 5px;">In progress</label>
-        {{ taskCounts.inProgress }}
-        <i class="mdi mdi-dots-horizontal"></i> <!-- Three dots icon -->
-        <i class="mdi mdi-plus"></i> <!-- Plus icon -->
+        <span style="color: #B9B9B7;">{{ taskCounts.inProgress }}</span>
+        <i class="fas fa-ellipsis-h" style="color: #B9B9B7;"></i> 
+        <i class="fas fa-plus" style="color: #B9B9B7;"></i> 
       </h2>
       <div class="tasks" id="inProgress" @drop="drop($event, 'inProgress')" @dragover.prevent="allowDrop">
         <div class="task" v-for="task in tasks.inProgress" :key="task.id" :draggable="true" @dragstart="dragStart($event, 'inProgress', task.id)">
@@ -31,9 +31,9 @@
     <div class="status">
       <h2>
         <label style="background-color: #cde7e2; border-radius: 5px;">Completed</label>
-        {{ taskCounts.completed }}
-        <i class="mdi mdi-dots-horizontal"></i> <!-- Three dots icon -->
-        <i class="mdi mdi-plus"></i> <!-- Plus icon -->
+       <span style="color: #B9B9B7;">{{ taskCounts.completed }}</span>
+        <i class="fas fa-ellipsis-h" style="color: #B9B9B7;"></i> 
+        <i class="fas fa-plus" style="color: #B9B9B7;"></i> 
       </h2>
       <div class="tasks" id="completed" @drop="drop($event, 'completed')" @dragover.prevent="allowDrop">
         <div class="task" v-for="task in tasks.completed" :key="task.id" :draggable="true" @dragstart="dragStart($event, 'completed', task.id)">
@@ -95,6 +95,12 @@ export default {
 };
 </script>
 
+
+
 <style>
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+
+
 @import url('../css/index.css');
+
 </style>

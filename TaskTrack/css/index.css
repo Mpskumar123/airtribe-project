@@ -12,7 +12,7 @@
   padding: 10px;
   border-radius: 5px;
   box-sizing: border-box;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 
 .tasks {
@@ -23,18 +23,19 @@
 }
 
 .task {
-  background-color: #f0f0f0;
+  background-color: #FFFFFF;
+  border: 2px solid #D9D9D9;
   margin-bottom: 5px;
   padding: 5px;
-  border-radius: 3px;
+  border-radius: 5px;
   cursor: pointer;
 }
 
 button {
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
-/* Media query for smaller screens (e.g., mobile) */
+/* Media Queries */
 @media (max-width: 1200px) {
   .container {
     flex-direction: column;
@@ -44,13 +45,22 @@ button {
   .status {
     width: calc(100% - 20px);
   }
+  
+ 
+  .status .tasks {
+    border: none;
+  }
 }
 
-/* Media query for larger screens (e.g., desktop) */
 @media (min-width: 1200px) {
   .status {
     flex-direction: row;
     align-items: center;
     flex-basis: calc(33.33% - 20px);
+  }
+
+  /* Remove borders from inner containers */
+  .status .tasks {
+    border: none;
   }
 }
