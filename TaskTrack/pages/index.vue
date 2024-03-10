@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <!-- Task lists for Not started, In progress, and Completed -->
     <div class="status">
       <h2>
         <label class="status-label not-started">Not started</label>
@@ -17,7 +16,6 @@
       </div>
       <button @click="addTask('notStarted')"><span>+ New</span></button>
     </div>
-    <!-- Other task lists for In progress and Completed -->
     <div class="status">
       <h2>
         <label class="status-label in-progress">In progress</label>
@@ -51,13 +49,9 @@
       <button @click="addTask('completed')"><span>+ New</span></button>
     </div>
 
-    <!-- Detail view section -->
     <div v-if="selectedTask" class="detail-view">
       <h2>Task Details</h2>
-      <div>
-        <label>Title: </label>
-        <input v-model="selectedTask.title" type="text" />
-      </div>
+
       <div>
         <label>Status: </label>
         <select v-model="selectedTask.status">
@@ -70,12 +64,12 @@
         <label>Description: </label>
         <textarea v-model="selectedTask.description"></textarea>
       </div>
+      <div v-if="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
       <button @click="saveTask">Save</button>
       <button @click="deleteTask">Delete</button>
     </div>
-    <div v-if="errorMessage" class="error-message">
-  {{ errorMessage }}
-      </div>
 
   </div>
 </template>
@@ -86,20 +80,23 @@ export default {
     return {
       tasks: {
         notStarted: [
-          { id: 1, description: "Task 1 - Not started" },
-          { id: 2, description: "Task 2 - Not started" },
-          { id: 3, description: "Task 3 - Not started" }
+          { id: 1, description: "Second round interview" },
+          { id: 2, description: "Internship in airtribe" },
+          { id: 3, description: "Full time employee" }
         ],
+
         inProgress: [
-          { id: 4, description: "Task 4 - In progress" },
-          { id: 5, description: "Task 5 - In progress" }
+          { id: 4, description: "Interview In progress" },
+          { id: 5, description:  "Project In progress" }
         ],
+
         completed: [
-          { id: 6, description: "Task 6 - Completed" },
-          { id: 7, description: "Task 7 - Completed" }
+          { id: 6, description: "Application Completed" },
+          { id: 7, description: "Project Completed" }
         ]
       },
-      selectedTask: null // To store the selected task for detail view
+      selectedTask: null, 
+      errorMessage: "" 
     };
   },
   methods: {
@@ -121,43 +118,38 @@ export default {
       const { status, taskId } = JSON.parse(event.dataTransfer.getData("text/plain"));
       const taskIndex = this.tasks[status].findIndex(task => task.id === taskId);
       const task = this.tasks[status].splice(taskIndex, 1)[0];
-      task.id = Date.now(); // Update task ID
+      task.id = Date.now(); 
       this.tasks[newStatus].push(task);
     },
     showDetail(task) {
       this.selectedTask = task;
     },
     saveTask() {
-      // Implement save task logic here
-      this.selectedTask = null; // Hide detail view after saving
+      this.selectedTask = null; 
     },
     deleteTask() {
-  if (!this.selectedTask) {
-    console.error("No task selected for deletion.");
-    this.errorMessage = "No task selected for deletion.";
-    return;
-  }
+      if (!this.selectedTask) {
+        console.error("No task selected for deletion.");
+        this.errorMessage = "No task selected for deletion.";
+        return;
+      }
 
-  const { status } = this.selectedTask;
-  if (!status || !this.tasks[status]) {
-    console.error("Invalid task status or task list.");
-    this.errorMessage = "Invalid task status or task list.";
-    return;
-  }
+      const { status } = this.selectedTask;
+      if (!status || !this.tasks[status]) {
+        console.error("Invalid task status or task list.");
+        this.errorMessage = "Invalid task status or task list.";
+        return;
+      }
 
-  const index = this.tasks[status].findIndex(task => task.id === this.selectedTask.id);
-  if (index !== -1) {
-    this.tasks[status].splice(index, 1);
-    this.selectedTask = null; // Hide detail view after deleting
-    this.errorMessage = ""; // Clear any previous error message
-  } else {
-    this.errorMessage = "Task not found for deletion.";
-  }
-}
-
-
-
-
+      const index = this.tasks[status].findIndex(task => task.id === this.selectedTask.id);
+      if (index !== -1) {
+        this.tasks[status].splice(index, 1);
+        this.selectedTask = null; 
+        this.errorMessage = ""; 
+      } else {
+        this.errorMessage = "Task not found for deletion.";
+      }
+    }
   },
   computed: {
     taskCounts() {
@@ -172,11 +164,15 @@ export default {
 </script>
 
 <style scoped>
-/* Your existing styles here */
 
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
 
 
 @import url('../css/index.css');
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}
 
 </style>
